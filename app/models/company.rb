@@ -14,7 +14,11 @@ class Company < ActiveRecord::Base
           new_hash.merge!({k.tr(' ', '_').tr('-','_') => v})
         end
       end
-      company_datum = CompanyDatum.create! new_hash.to_hash
+      begin
+        company_datum = CompanyDatum.create! new_hash.to_hash
+      rescue
+
+      end
     end
   end
 

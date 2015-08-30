@@ -3,7 +3,7 @@ class CreateCompanyData < ActiveRecord::Migration
     create_table :company_data do |t|
       t.integer :company_id
 
-      t.datetime  :date
+      t.date      :date
       t.string    :category
       t.string    :employee_name
       t.string    :employee_address

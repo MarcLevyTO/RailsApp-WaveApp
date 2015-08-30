@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150829212755) do
 
   create_table "company_data", force: :cascade do |t|
     t.integer  "company_id"
-    t.date "date"
+    t.date     "date"
     t.string   "category"
     t.string   "employee_name"
     t.string   "employee_address"

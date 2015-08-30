@@ -1,13 +1,16 @@
 <div>
   <%= link_to "Add Company", new_company_path %>
+
   <table>
-    <th>ID</th>
     <th>Company Name</th>
+    <th>Data Rows</th>
+
     <% @companies.each do |company| %>
       <tr>
-        <td><%= company.id %></td>
-        <td><%= company.company_name %></td>
+        <td><%= link_to(company.company_name, :controller => 'companies', :action => 'show', :id => company.id) %></td>
+        <td><%= company.company_datum.length %></td>
       </tr>
     <% end %>
   </table>
+
 </div>

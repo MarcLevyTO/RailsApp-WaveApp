@@ -50,6 +50,7 @@ class CompaniesController < ApplicationController
     else
       redirect_to @company, notice: 'Data import not succcessful.'
     end
+
   end
 
   private
