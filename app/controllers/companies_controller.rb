@@ -1,4 +1,4 @@
-class CompanyController < ApplicationController
+class CompaniesController < ApplicationController
 
   def index
     @companies = Company.all
@@ -17,7 +17,7 @@ class CompanyController < ApplicationController
   end
 
   def create
-    @company = Company.new(params[:company])
+    @company = Company.create(company_params)
 
     if @company.save
       redirect_to @company, notice: 'Company was successfully created.'
@@ -41,6 +41,20 @@ class CompanyController < ApplicationController
     @company.destroy
 
     redirect_to companies_url
+  end
+
+  def import_data
+    @company = Company.find(params[:id])
+    if @company.import(params[:file])
+      redirect_to @company, notice: 'Data import successful.'
+    else
+      redirect_to @company, notice: 'Data import not succcessful.'
+    end
+  end
+
+  private
+  def company_params
+    params.require(:company).permit(:company_name)
   end
 
 end

@@ -1,0 +1,13 @@
+<div>
+  <%= link_to "Add Company", new_company_path %>
+  <table>
+    <th>ID</th>
+    <th>Company Name</th>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.id %></td>
+        <td><%= company.company_name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,9 @@
+<%= form_for @company do |f| %>
+  <div>
+    <%= f.label :company_name %>
+    <span>
+      <%= f.text_field :company_name %>
+    </span>
+  </div>
+  <%= f.submit %>
+<% end %>

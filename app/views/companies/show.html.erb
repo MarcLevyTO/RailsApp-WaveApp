@@ -1,0 +1,36 @@
+<p><%= @company.id %></p>
+<p><%= @company.company_name %></p>
+
+<h2> Import data </h2>
+
+<%= form_tag import_data_company_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Category</th>
+    <th>Employee Name</th>
+    <th>Employee Address</th>
+    <th>Expense Description</th>
+    <th>Pre-Tax Amount</th>
+    <th>Tax Name</th>
+    <th>Tax Amount</th>
+  </tr>
+
+  <% @company.company_datum.each do |company_data| %>
+    <tr>
+      <td><%= company_data.date %></td>
+      <td><%= company_data.category %></td>
+      <td><%= company_data.employee_name %></td>
+      <td><%= company_data.employee_address %></td>
+      <td><%= company_data.expense_description %></td>
+      <td><%= company_data.pre_tax_amount %></td>
+      <td><%= company_data.tax_name %></td>
+      <td><%= company_data.tax_amount %></td>
+    </tr>
+  <% end %>
+
+</table>
