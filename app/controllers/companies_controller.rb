@@ -1,11 +1,12 @@
 class CompaniesController < ApplicationController
 
   def index
-    @companies = Company.all
+    @companies = Company.all.paginate(:per_page => 5, :page => params[:page])
   end
 
   def show
     @company = Company.find(params[:id])
+    @company_datum = @company.company_datum.order(params[:sort] + " " + params[:direction]).paginate(:per_page => 20, :page => params[:page])
   end
 
   def new
@@ -54,8 +55,7 @@ class CompaniesController < ApplicationController
   end
 
   private
-  def company_params
-    params.require(:company).permit(:company_name)
-  end
-
+    def company_params
+      params.require(:company).permit(:company_name)
+    end
 end

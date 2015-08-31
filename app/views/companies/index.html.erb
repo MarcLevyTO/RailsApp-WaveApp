@@ -1,7 +1,7 @@
 <div>
   <%= link_to "Add Company", new_company_path %>
 
-  <table>
+  <table class="table table-hover">
     <th>Company Name</th>
     <th>Data Rows</th>
 
@@ -12,5 +12,6 @@
       </tr>
     <% end %>
   </table>
+  <%= will_paginate @companies %>
 
 </div>
