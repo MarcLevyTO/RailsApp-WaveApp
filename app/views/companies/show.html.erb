@@ -1,48 +1,49 @@
-<h2><%= @company.company_name %></h2>
+ <div id="mainBody">
 
-<div class="form-group">
-  <label>File input</label>
-  <%= form_tag import_data_company_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "Import", class: "btn btn-default", disabled: true %>
-  <% end %>
-</div>
+  <ul class="nav nav-tabs">
+    <li role="presentation"><a href="/">Home</a></li>
+    <li role="presentation" class="active"><a href="#"><%= @company.company_name %></a></li>
+  </ul>
+
+  <br>
+
+  <div class="form-group">
+    <label>File input</label>
+    <%= form_tag import_data_company_path, multipart: true, class: "form-inline" do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import", class: "btn btn-default", disabled: true %>
+    <% end %>
+  </div>
 
 
-<table class="table table-hover">
-  <tr>
-<!--     <th>Date</th>
-    <th>Category</th>
-    <th>Employee Name</th>
-    <th>Employee Address</th>
-    <th>Expense Description</th>
-    <th>Pre-Tax Amount</th>
-    <th>Tax Name</th>
-    <th>Tax Amount</th> -->
-    <th><%= sortable "date", "Date" %></th>
-    <th><%= sortable "category", "Category" %></th>
-    <th><%= sortable "employee_name", "Employee Name" %></th>
-    <th><%= sortable "employee_address", "Employee Address" %></th>
-    <th><%= sortable "expense_description", "Expense Description" %></th>
-    <th><%= sortable "pre_tax_amount", "Pre-tax Amount" %></th>
-    <th><%= sortable "tax_name", "Tax Name" %></th>
-    <th><%= sortable "tax_amount", "Tax Amount" %></th>
-  </tr>
-
-  <% @company_datum.each do |company_data| %>
+  <table class="table table-hover">
     <tr>
-      <td><%= company_data.date %></td>
-      <td><%= company_data.category %></td>
-      <td><%= company_data.employee_name %></td>
-      <td><%= company_data.employee_address %></td>
-      <td><%= company_data.expense_description %></td>
-      <td><%= company_data.pre_tax_amount %></td>
-      <td><%= company_data.tax_name %></td>
-      <td><%= company_data.tax_amount %></td>
+      <th><%= sortable "date", "Date" %></th>
+      <th><%= sortable "category", "Category" %></th>
+      <th><%= sortable "employee_name", "Employee Name" %></th>
+      <th><%= sortable "employee_address", "Employee Address" %></th>
+      <th><%= sortable "expense_description", "Expense Description" %></th>
+      <th><%= sortable "pre_tax_amount", "Pre-tax Amount" %></th>
+      <th><%= sortable "tax_name", "Tax Name" %></th>
+      <th><%= sortable "tax_amount", "Tax Amount" %></th>
     </tr>
-  <% end %>
-</table>
-<%= will_paginate @company_datum %>
+
+    <% @company_datum.each do |company_data| %>
+      <tr>
+        <td><%= company_data.date %></td>
+        <td><%= company_data.category %></td>
+        <td><%= company_data.employee_name %></td>
+        <td><%= company_data.employee_address %></td>
+        <td><%= company_data.expense_description %></td>
+        <td><%= company_data.pre_tax_amount %></td>
+        <td><%= company_data.tax_name %></td>
+        <td><%= company_data.tax_amount %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @company_datum, renderer: BootstrapPagination::Rails %>
+
+</div>
 
 <script>
 

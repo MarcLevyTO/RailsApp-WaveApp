@@ -2,6 +2,8 @@ class Company < ActiveRecord::Base
 
   has_many :company_datum
 
+  validates :company_name, :presence => true, :uniqueness => true
+
   def import(file)
     CSV.foreach(file.path, headers: true) do |row|
       new_hash = {'company_id' => self.id}

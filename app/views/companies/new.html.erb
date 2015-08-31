@@ -1,9 +1,24 @@
-<%= form_for @company do |f| %>
-  <div class="form-group">
-    <%= f.label :company_name %>
-    <span>
-      <%= f.text_field :company_name, :class => "form-control", :placeholder => "Company" %>
-    </span>
-  </div>
-  <%= submit_tag "Submit", class: "btn btn-default" %>
-<% end %>
+<div id="mainBody">
+
+  <ul class="nav nav-tabs">
+    <li role="presentation"><a href="/">Home</a></li>
+    <li role="presentation" class="active"><a href="#">Create New Company</a></li>
+  </ul>
+
+  <br/>
+
+  <% if @company.errors.present? %>
+    <div class="alert alert-danger" role="alert"><%= @company.errors.full_messages.first %></div>
+  <% end %>
+
+  <%= form_for @company do |f| %>
+    <div class="form-group">
+      <%= f.label :company_name %>
+      <span>
+        <%= f.text_field :company_name, :class => "form-control", :placeholder => "Company" %>
+      </span>
+    </div>
+    <%= submit_tag "Submit", class: "btn btn-default" %>
+  <% end %>
+
+</div>

@@ -1,12 +1,13 @@
 class CompaniesController < ApplicationController
 
   def index
-    @companies = Company.all.paginate(:per_page => 5, :page => params[:page])
+    @companies = Company.all.order('id desc').paginate(:per_page => 10, :page => params[:page])
   end
 
   def show
     @company = Company.find(params[:id])
-    @company_datum = @company.company_datum.order(params[:sort] + " " + params[:direction]).paginate(:per_page => 20, :page => params[:page])
+
+    @company_datum = @company.company_datum.order(sort_column + " " + sort_direction).paginate(:per_page => 20, :page => params[:page])
   end
 
   def new
@@ -23,7 +24,7 @@ class CompaniesController < ApplicationController
     if @company.save
       redirect_to @company, notice: 'Company was successfully created.'
     else
-      render action: "new"
+      render action: "new", notice: 'Company name already exists'
     end
   end
 
@@ -57,5 +58,13 @@ class CompaniesController < ApplicationController
   private
     def company_params
       params.require(:company).permit(:company_name)
+    end
+
+     def sort_column
+      CompanyDatum.column_names.include?(params[:sort]) ? params[:sort] : "date"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end

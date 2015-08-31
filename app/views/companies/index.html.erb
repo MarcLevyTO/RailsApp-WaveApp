@@ -1,17 +1,26 @@
-<div>
-  <%= link_to "Add Company", new_company_path %>
+<div id="mainBody">
 
-  <table class="table table-hover">
-    <th>Company Name</th>
-    <th>Data Rows</th>
+  <ul class="nav nav-tabs">
+    <li role="presentation"><a href="/">Home</a></li>
+  </ul>
 
-    <% @companies.each do |company| %>
-      <tr>
-        <td><%= link_to(company.company_name, :controller => 'companies', :action => 'show', :id => company.id) %></td>
-        <td><%= company.company_datum.length %></td>
-      </tr>
-    <% end %>
-  </table>
-  <%= will_paginate @companies %>
+  <br>
+
+  <div>
+    <table class="table table-hover">
+      <th>Company Name</th>
+      <th>Data Rows</th>
+
+      <% @companies.each do |company| %>
+        <tr>
+          <td><%= link_to(company.company_name, :controller => 'companies', :action => 'show', :id => company.id) %></td>
+          <td><%= company.company_datum.length %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= will_paginate @companies, renderer: BootstrapPagination::Rails %>
+  </div>
+
+  <%= button_to "Add Company", new_company_path, :class => "btn btn-default", :method => :get %>
 
 </div>
