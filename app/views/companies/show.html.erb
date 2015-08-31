@@ -15,6 +15,27 @@
     <% end %>
   </div>
 
+  <table class="table table-hover">
+    <tr>
+      <th>Month/Year</th>
+      <th>Total Pre-Tax Amount</th>
+      <th>Total Tax Amount</th>
+    </tr>
+    <% @grouped_datum.sort.each do |month, data| %>
+      <% total_pre_tax_amount = 0 %>
+      <% total_tax_amount = 0 %>
+      <% for datum in data %>
+        <% total_pre_tax_amount += datum.pre_tax_amount %>
+        <% total_tax_amount += datum.tax_amount %>
+      <% end %>
+      <tr>
+        <td><%= month.strftime('%B %Y') %></td>
+        <td><%= total_pre_tax_amount %></td>
+        <td><%= total_tax_amount %></td>
+      </tr>
+    <% end %>
+  </table>
+
 
   <table class="table table-hover">
     <tr>

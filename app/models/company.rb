@@ -4,9 +4,15 @@ class Company < ActiveRecord::Base
 
   validates :company_name, :presence => true, :uniqueness => true
 
+  def monthly_calculations
+
+  end
+
   def import(file)
     CSV.foreach(file.path, headers: true) do |row|
       new_hash = {'company_id' => self.id}
+
+      # Transform data to enter into db nicely
       row.to_hash.each_pair do |k,v|
         # Handle formatting of date
         if ( k == 'date' )
@@ -16,6 +22,7 @@ class Company < ActiveRecord::Base
           new_hash.merge!({k.tr(' ', '_').tr('-','_') => v})
         end
       end
+
       begin
         company_datum = CompanyDatum.create! new_hash.to_hash
       rescue
