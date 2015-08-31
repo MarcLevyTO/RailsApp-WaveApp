@@ -1,14 +1,15 @@
-<p><%= @company.id %></p>
-<p><%= @company.company_name %></p>
+<h2><%= @company.company_name %></h2>
 
-<h2> Import data </h2>
+<div class="form-group">
+  <label>File input</label>
+  <%= form_tag import_data_company_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import", class: "btn btn-default", disabled: true %>
+  <% end %>
+</div>
 
-<%= form_tag import_data_company_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>
 
-<table>
+<table class="table table-hover">
   <tr>
     <th>Date</th>
     <th>Category</th>
@@ -34,3 +35,18 @@
   <% end %>
 
 </table>
+
+<script>
+
+$(document).ready(
+    function(){
+        $('input:file').change(
+            function(){
+                if ($(this).val()) {
+                    $('input:submit').attr('disabled',false);
+                }
+            }
+            );
+    });
+
+</script
