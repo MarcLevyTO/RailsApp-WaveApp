@@ -4,8 +4,8 @@ class Company < ActiveRecord::Base
 
   validates :company_name, :presence => true, :uniqueness => true
 
-  def monthly_calculations
-
+  def grouped_monthly
+    self.company_datum.all.group_by { |t| t.date.beginning_of_month }
   end
 
   def import(file)

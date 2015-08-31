@@ -8,7 +8,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
 
     @company_datum = @company.company_datum.order(sort_column + " " + sort_direction).paginate(:per_page => 20, :page => params[:page])
-    @grouped_datum = @company.company_datum.all.group_by { |t| t.date.beginning_of_month }
+    @grouped_datum = @company.grouped_monthly
   end
 
   def new
