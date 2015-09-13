@@ -48,6 +48,7 @@ class CompaniesController < ApplicationController
 
   def import_data
     @company = Company.find(params[:id])
+    # puts "LOOK HERE ---> #{params[:file]}"
     if @company.import(params[:file])
       redirect_to @company, notice: 'Data import successful.'
     else
